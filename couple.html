@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Picker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="hidden">
+        <h1>Who can pick</h1>
+
+        <div class="input-container">
+          <input type="text" v-model.trim="inputName" />
+          <button @click="addNameToList" class="">Add</button>
+        </div>
+
+        <div class="error-label animate__animated animate__shakeX" v-if="showError">{{ error }}</div>
+
+        <div class="list-of-names">
+          <div v-for="(name, index) in names" :key="name" @click="removeName(index)" class="animate__animated animate__fadeIn">{{ name }}</div>
+        </div>
+      </div>
+
+      <div id="names" class="container animate__animated animate__fadeIn" v-if="state">
+        <div class="logo">
+          <div v-if="isReady" class="animate__animated animate__bounceIn">
+            <div class="action-button" @click="showResult">Start!!!</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="result" class="container animate__animated animate__fadeIn" v-if="!state">
+        <div class="result-container">
+          <h3>Truth or Dare:</h3>
+          <div class="result-value">{{ result }}</div>
+
+          <div class="action-button" @click="resetApp">Mulai Dari Awal</div>
+          <br />
+          <div class="action-button btn2" @click="getNewResult">Pertanyaan Selanjutnya</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/couple.js"></script>
+</html>
